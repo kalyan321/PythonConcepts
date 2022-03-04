@@ -1,42 +1,30 @@
-# Python3 program for demonstrating
-# Generators Produces Data
-# Coroutines Consume Data
+# Python3 program for demonstrating Generators
 
-# this function returns 1 to 100 numbers
+# If a function contains yield keyword, then that function is known as Generator functions
+# Genarators functions returns generators objects
+# Generator Objects are used either by calling the next method on the generator object or
+# using generator object in "for in " loop
+# Generators Produces Data
+
+# this function traverse 1 to 100 numbers
 def generator_example():
     for num in range(1, 101):
         yield num
 
 
-def calling_generator():
+# this function prints 1 to 100 numbers
+def generator_object_using_forin_loop():
     for val in generator_example():
         print(val)
 
 
-# Coroutine Example
-def print_name(prefix):
-    print("Searching prefix:{}".format(prefix))
-    while True:
-        name = (yield)
-        print(name)
-        if prefix in name:
-            print(name)
-
-
-def call_corutine():
-    # calling coroutine, nothing will happen
-    corou = print_name("Dear")
-
-    # This will start execution of coroutine and
-    # Prints first line "Searching prefix..."
-    # and advance execution to the first yield expression
-    corou.__next__()
-
-    # sending inputs
-    corou.send("Atul")
-    corou.send("Dear Atul")
+# this function prints 1, 2 because we used only two times the next
+def generator_object_using_next():
+    generator = generator_example()
+    print(generator.__next__())
+    print(next(generator))
 
 
 if __name__ == "__main__":
-    calling_generator()
-    call_corutine()
+    generator_object_using_next()
+    # generator_object_using_forin_loop()
